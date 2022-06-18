@@ -1,0 +1,14 @@
+com/beewell/MainActivity.java
+ com.beewell.MainActivity
+com/beewell/ReactNativeFlipper.java
+ com.beewell.ReactNativeFlipper
+ com.beewell.ReactNativeFlipper$1
+ com.beewell.ReactNativeFlipper$2
+ com.beewell.ReactNativeFlipper$2$1
+com/beewell/MainApplication.java
+ com.beewell.MainApplication
+ com.beewell.MainApplication$1
+com/beewell/BuildConfig.java
+ com.beewell.BuildConfig
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList

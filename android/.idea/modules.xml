@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Beewell.iml" filepath="$PROJECT_DIR$/.idea/modules/Beewell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Beewell.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Beewell.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/714773752/Beewell.react-native-date-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/714773752/Beewell.react-native-date-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1326519887/Beewell.react-native-gesture-handler.iml" filepath="$PROJECT_DIR$/.idea/modules/-1326519887/Beewell.react-native-gesture-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1649113700/Beewell.react-native-pager-view.iml" filepath="$PROJECT_DIR$/.idea/modules/1649113700/Beewell.react-native-pager-view.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1653946371/Beewell.react-native-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/1653946371/Beewell.react-native-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/758166676/Beewell.react-native-picker_picker.iml" filepath="$PROJECT_DIR$/.idea/modules/758166676/Beewell.react-native-picker_picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2138789429/Beewell.react-native-reanimated.iml" filepath="$PROJECT_DIR$/.idea/modules/-2138789429/Beewell.react-native-reanimated.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1471044058/Beewell.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/1471044058/Beewell.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/631071346/Beewell.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/631071346/Beewell.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/309982149/Beewell.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/309982149/Beewell.react-native-vector-icons.iml" />
+    </modules>
+  </component>
+</project>
