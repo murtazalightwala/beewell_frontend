@@ -1,7 +1,9 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, Image, AsyncStorage } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles.js';
+import {signIn} from "../Utils/callAPI";
+import {_getUserItems} from '../App.js';
 
 class SignIn extends React.Component {
 
@@ -29,8 +31,26 @@ class SignIn extends React.Component {
     }
 
     signInButtonClick() {
-        alert(this.state.username + this.state.password)
-        this.props.navigation.navigate('Hives')
+        signIn({
+            "username":this.state.username,
+            "password": this.state.password
+        },(bool,data)=>{
+
+if(bool){
+    console.log(data)
+    AsyncStorage.setItem(
+            'token',
+            data.token
+          ).then();
+     AsyncStorage.setItem(
+            'user',
+            data.user
+          ).then();
+
+}
+else alert(data)
+        })
+
     }
 
     render()
@@ -78,7 +98,7 @@ render()
         name = "user-o"
         size = {20}
         />
-    <TextInput style = {styles.signInText} placeholder = "Username" value = {this.state.username} onChangeText = {this.onUsernameInput} value = {this.state.username} />
+    <TextInput style = {styles.signInText} placeholder = "Username" value = {this.state.username} onChangeText = {this.onUsernameInput} />
     </View>
 }
 }

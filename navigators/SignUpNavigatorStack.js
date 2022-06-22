@@ -6,8 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
  function SignUpNavigatorStack() {
     return ( 
-        <NavigationContainer>
-    <SignUpStack.Navigator initialRouteName = 'General Info' screenOptions = {{headerShown : false}}>       
+    <SignUpStack.Navigator initialRouteName = 'Sign In' screenOptions = {{headerShown : false}}>       
     <SignUpStack.Screen name = 'General Info' component = {GeneralInfoView} />
     <SignUpStack.Screen name = 'Medical Details' component = {MedicalDetailsView} />
     <SignUpStack.Screen name = 'Emergency Contact' component = {EmergencyContactView} />
@@ -15,7 +14,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
     <SignUpStack.Screen name = 'Register User' component = {SignUp} />
     <SignUpStack.Screen name = 'Sign In' component = {SignIn} />
     </SignUpStack.Navigator>
-    </NavigationContainer>
     );
 }
 
