@@ -5,9 +5,20 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SignUpFormContext } from '../context/SignUpFormContext.js';
 
 
- function SignUpNavigatorStack() {
+ class SignUpNavigatorStack extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile: {"dob":new Date()},
+        setProfile: (new_profile) => {
+            this.setState({profile: new_profile})
+        }
+
+        };
+    }    
+    render() {
     return ( 
-        <SignUpFormContext.Provider>
+        <SignUpFormContext.Provider value = {this.state}>
     <SignUpStack.Navigator initialRouteName = 'Sign In' screenOptions = {{headerShown : false}}>       
     <SignUpStack.Screen name = 'General Info' component = {GeneralInfoView} />
     <SignUpStack.Screen name = 'Medical Details' component = {MedicalDetailsView} />
@@ -18,8 +29,8 @@ import { SignUpFormContext } from '../context/SignUpFormContext.js';
     </SignUpStack.Navigator>
     </SignUpFormContext.Provider>
     );
+    }
 }
-
 const SignUpStack = createNativeStackNavigator();
 
 export default SignUpNavigatorStack ; 

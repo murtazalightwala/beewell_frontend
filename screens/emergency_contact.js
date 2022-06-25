@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { SignUpFormContext } from '../context/SignUpFormContext.js';
 import styles from './styles.js';
 
 
@@ -9,8 +10,7 @@ class EmergencyContactView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            em_contact_name : '',
-            em_phone : '',
+            profile:{}
             
         }
         this.next_press = this.next_press.bind(this);
@@ -20,24 +20,34 @@ class EmergencyContactView extends React.Component {
 
     }
     
+    static contextType = SignUpFormContext;
+
+    componentDidMount() {
+        let context_profile = this.context.profile;
+        console.log(context_profile);
+        this.setState({profile: context_profile});
+      }
+
     change_em_contact_name = async function(text) {
-        await this.setState({em_contact_name: text})
+        let new_profile = this.state.profile
+        new_profile.em_contact_name = text
+        await this.setState({profile: new_profile});
     }
 
     change_em_phone = async function(text) {
-        await this.setState({em_phone: text})
+        let new_profile = this.state.profile
+        new_profile.em_phone = text
+        await this.setState({profile: new_profile});
     }
 
     prev_press() {
+        this.context.setProfile(this.state.profile);
         this.props.navigation.navigate('Medical Details');
     }
 
     next_press(){
-        step4_pass = {}
-        Object.assign(step4_pass, this.props.route.params)
-        Object.assign(step4_pass ,this.state)
-        Alert.alert(JSON.stringify(step4_pass))
-        this.props.navigation.navigate('Is in Healthcare', step4_pass);
+        this.context.setProfile(this.state.profile);
+        this.props.navigation.navigate('Is in Healthcare');
     }  
 
 render()
@@ -45,9 +55,9 @@ render()
     return <View>
     <View style = {styles.SignUpFormContainer}>
         <Text style = {styles.SignUpFormText}>Emergency Contact Person's Name</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Emergency Contact Name' value = {this.state.em_contact_name} onChangeText = {this.change_em_contact_name} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Emergency Contact Name' value = {this.state.profile.em_contact_name} onChangeText = {this.change_em_contact_name} />
         <Text style = {styles.SignUpFormText}>Emergency Contact Person's Phone Number</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Phone Number' value = {this.state.em_phone} onChangeText = {this.change_em_phone} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Phone Number' value = {this.state.profile.em_phone} onChangeText = {this.change_em_phone} />
         </View>
         <View style = {styles.SignUpNavigationContainer}>
             <View style = {{

@@ -48,7 +48,7 @@ if(bool){
           ).then();
 
 }
-else alert(data)
+else alert(JSON.stringify(data.message))
         })
 
     }

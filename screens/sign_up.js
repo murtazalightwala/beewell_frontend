@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View, TextInput, TouchableOpacity, Alert, AsyncStorage } from 'react-native';
 import { signUp } from '../Utils/callAPI.js';
 import styles from './styles.js';
+import {SignUpFormContext} from '../context/SignUpFormContext.js'
 
 
 class SignUp extends React.Component {
@@ -22,6 +23,8 @@ class SignUp extends React.Component {
         this.submit_press = this.submit_press.bind(this);
         this.prev_press = this.prev_press.bind(this);
     }
+
+    static contextType = SignUpFormContext;
     
 
 changeUsername = async function (text) {
@@ -42,10 +45,9 @@ changePassword2 = async function (text) {
 
 submit_press(){
     form_data = {}
-          Object.assign(form_data, this.props.route.params)
+          Object.assign(form_data, this.context.profile)
           Object.assign(form_data, this.state)
           form_data['dob'] = form_data['dob'].toLocaleDateString()
-          alert(JSON.stringify(form_data))
           signUp(form_data, (bool, data) => {
               if(bool){
             console.log(data)
@@ -57,12 +59,13 @@ submit_press(){
                     'user',
                     form_data.username
                   ).then();
-        
+                  this.props.navigation.navigate("Sign In", form_data);
         }
-        else alert(data)
+        else {
+            alert(data)
+        }
                 })
         
-          this.props.navigation.navigate("Sign In", form_data)
 }
 
 prev_press(){

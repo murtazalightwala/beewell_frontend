@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { SignUpFormContext } from '../context/SignUpFormContext.js';
 import styles from './styles.js';
 
 
@@ -9,8 +10,7 @@ class IsinHealthCareView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            is_in_healthcare : "",
-            healthcare_catagory : "",
+            profile:{}
             
 
         }
@@ -20,6 +20,16 @@ class IsinHealthCareView extends React.Component {
         this.prev_press = this.prev_press.bind(this);
 
     }
+    
+    static contextType = SignUpFormContext;
+
+    componentDidMount() {
+        let context_profile = this.context.profile;
+        console.log(context_profile);
+        this.setState({profile: context_profile});
+      }
+
+
     changeIsInHealthCare = async function (text) {
         if (text.toLowerCase() === "yes"){
             let bool = true;
@@ -27,21 +37,23 @@ class IsinHealthCareView extends React.Component {
         else{
             bool = false;
         }
-        await this.setState({is_in_healthcare: bool});
+        let new_profile = this.state.profile
+        new_profile.is_in_healthcare = bool
+        await this.setState({profile: new_profile});
       };
       changeHealthCareCatagory = async function (text) {
-        await this.setState({healthcare_catagory: text});
+        let new_profile = this.state.profile
+        new_profile.healthcare_catagory = text
+        await this.setState({profile: new_profile});
       };
     
       next_press() {
-          form_data = {}
-          Object.assign(form_data, this.props.route.params)
-          Object.assign(form_data, this.state)
-          Alert.alert(JSON.stringify(form_data))
-        this.props.navigation.navigate('Register User', form_data);
+        this.context.setProfile(this.state.profile);
+        this.props.navigation.navigate('Register User');
     }
 
     prev_press(){
+        this.context.setProfile(this.state.profile);
         this.props.navigation.navigate('Emergency Contact');
     }
 

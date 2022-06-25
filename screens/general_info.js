@@ -3,22 +3,17 @@ import {TouchableOpacity, Text, TextInput, View, Alert, Modal} from 'react-nativ
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-date-picker';
 import styles from './styles.js';
+import { SignUpFormContext } from '../context/SignUpFormContext.js';
 
 class GeneralInfoView extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      first_name: '',
-      last_name: '',
-      dob: new Date(),
-      gender: 'male',
-      relationship_status: '',
-      children: '',
-      address: '',
-      profession: '',
-	  datepicker_visible: false,
+    profile: {"dob": new Date()},
+    datepicker_visible: false
     };
-
+    
     this.changeFirstName = this.changeFirstName.bind(this);
     this.changeLastName = this.changeLastName.bind(this);
     this.changeDob = this.changeDob.bind(this);
@@ -28,43 +23,68 @@ class GeneralInfoView extends React.Component {
     this.changeAddress = this.changeAddress.bind(this);
     this.changeProfession = this.changeProfession.bind(this);
     this.next_press = this.next_press.bind(this);
-	this.toggle_modal = this.toggle_modal.bind(this);
+	  this.toggle_modal = this.toggle_modal.bind(this);
   }
 
+  static contextType = SignUpFormContext;
+
+    componentDidMount() {
+      let context_profile = this.context.profile;
+      console.log(context_profile);
+      this.setState({profile: context_profile});
+    }
+
+
   changeFirstName = async function (text) {
-    await this.setState({first_name: text});
+    let new_profile = this.state.profile
+    new_profile.first_name = text
+    await this.setState({profile: new_profile});
   };
 
   changeLastName = async function (text) {
-    await this.setState({last_name: text});
+    let new_profile = this.state.profile
+    new_profile.last_name = text
+    await this.setState({profile: new_profile});
   };
   changeDob = async function (text) {
-    await this.setState({dob: text});
+    let new_profile = this.state.profile
+    new_profile.dob = text
+    await this.setState({profile: new_profile});
   };
 
   changeGender = async function (text, index) {
-    await this.setState({gender: text});
+    let new_profile = this.state.profile
+    new_profile.gender = text
+    await this.setState({profile: new_profile});
   };
 
   changeRelationshipStatus = async function (text) {
-    await this.setState({relationship_status: text});
+    let new_profile = this.state.profile
+    new_profile.relationship_status = text
+    await this.setState({profile: new_profile});
   };
 
   changeCountChildren = async function (text) {
-    await this.setState({children: text});
+    let new_profile = this.state.profile
+    new_profile.children = text
+    await this.setState({profile: new_profile});
   };
 
   changeAddress = async function (text) {
-    await this.setState({address: text});
-  };
+    let new_profile = this.state.profile
+    new_profile.address = text
+    await this.setState({profile: new_profile});
+    };
 
   changeProfession = async function (text) {
-    await this.setState({profession: text});
+    let new_profile = this.state.profile
+    new_profile.profession = text
+    await this.setState({profile: new_profile});
   };
 
   next_press() {
-    Alert.alert(JSON.stringify(this.state));
-    this.props.navigation.navigate('Medical Details', this.state);
+    this.context.setProfile(this.state.profile);
+    this.props.navigation.navigate('Medical Details');
   }
 
   toggle_modal() {
@@ -82,7 +102,7 @@ class GeneralInfoView extends React.Component {
               <DatePicker
                 style={styles.DateInput}
                 mode="date"
-                date={this.state.dob}
+                date={this.state.profile.dob}
                 onDateChange={this.changeDob}
               />
 			  <TouchableOpacity 
@@ -108,7 +128,7 @@ class GeneralInfoView extends React.Component {
               <TextInput
                 style={styles.SignUpFormTextInput}
                 placeholder="Enter First Name"
-                value={this.state.first_name}
+                value={this.state.profile.first_name}
                 onChangeText={this.changeFirstName}
               />
             </View>
@@ -122,7 +142,7 @@ class GeneralInfoView extends React.Component {
               <TextInput
                 style={styles.SignUpFormTextInput}
                 placeholder="Enter Last Name"
-                value={this.state.last_name}
+                value={this.state.profile.last_name}
                 onChangeText={this.changeLastName}
               />
             </View>
@@ -142,7 +162,7 @@ class GeneralInfoView extends React.Component {
               <Text style={styles.SignUpFormText}>Date of birth</Text>
 			  <TextInput
                 style={styles.SignUpFormTextInput}
-                value={this.state.dob.toDateString()}
+                value={this.state.profile.dob.toDateString()}
 				onPressIn={this.toggle_modal}
               />
 			  
@@ -156,7 +176,7 @@ class GeneralInfoView extends React.Component {
               <Text style={styles.SignUpFormText}>Gender</Text>
 
               <Picker style = {styles.GenderPicker}
-                selectedValue={this.state.gender}
+                selectedValue={this.state.profile.gender}
                 onValueChange={this.changeGender}>
                 <Picker.Item label="Male" value="male" />
                 <Picker.Item label="Female" value="female" />
@@ -174,21 +194,21 @@ class GeneralInfoView extends React.Component {
           <TextInput
             style={styles.SignUpFormTextInput}
             placeholder="Enter Number of children"
-            value={this.state.children}
+            value={this.state.profile.children}
             onChangeText={this.changeCountChildren}
           />
           <Text style={styles.SignUpFormText}>Address</Text>
           <TextInput
             style={styles.SignUpFormTextInput}
             placeholder="Enter your Address"
-            value={this.state.address}
+            value={this.state.profile.address}
             onChangeText={this.changeAddress}
           />
           <Text style={styles.SignUpFormText}>Profession</Text>
           <TextInput
             style={styles.SignUpFormTextInput}
             placeholder="Enter your Profession"
-            value={this.state.profession}
+            value={this.state.profile.profession}
             onChangeText={this.changeProfession}
           />
         </View>

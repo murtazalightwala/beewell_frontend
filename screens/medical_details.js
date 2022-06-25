@@ -1,6 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text, TextInput, View, Alert } from 'react-native';
 import styles from './styles.js';
+import { SignUpFormContext } from '../context/SignUpFormContext.js';
+
 
 
 
@@ -9,15 +11,7 @@ class MedicalDetailsView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            blood_group : '',
-            height : '',
-            weight : '',
-            blood_pressure : '',
-            allergies : '',
-            sugar_level : '',
-            routine_medications : '',
-            surgical_history : '',
-            other_details : '',
+            profile: {}
         }
 
         this.next_press = this.next_press.bind(this);
@@ -34,44 +28,69 @@ class MedicalDetailsView extends React.Component {
     
     }
 
+    static contextType = SignUpFormContext;
+
+    componentDidMount() {
+        let context_profile = this.context.profile;
+        console.log(context_profile);
+        this.setState({profile: context_profile});
+      }
+
     change_blood_group = async function(text) {
-        await this.setState({blood_group: text})
+        let new_profile = this.state.profile
+        new_profile.blood_group = text
+        await this.setState({profile: new_profile});
     }
     change_height = async function(text) {
-        await this.setState({height: text})
+        let new_profile = this.state.profile
+        new_profile.height = text
+        await this.setState({profile: new_profile});
     }
     change_weight = async function(text) {
-        await this.setState({weight: text})
+        let new_profile = this.state.profile
+        new_profile.weight = text
+        await this.setState({profile: new_profile});
+        
     }
     change_blood_pressure = async function(text) {
-        await this.setState({blood_pressure: text})
+        let new_profile = this.state.profile
+    new_profile.blood_pressure = text
+    await this.setState({profile: new_profile});
     }
     change_allergies = async function(text) {
-        await this.setState({allergies: text})
+        let new_profile = this.state.profile
+    new_profile.allergies = text
+    await this.setState({profile: new_profile});
     }
     change_sugar_level = async function(text) {
-        await this.setState({sugar_level: text})
+        let new_profile = this.state.profile
+    new_profile.sugar_level = text
+    await this.setState({profile: new_profile});
     }
     change_routine_medications = async function(text) {
-        await this.setState({routine_medications: text})
+        let new_profile = this.state.profile
+    new_profile.routine_medications = text
+    await this.setState({profile: new_profile});
     }
     change_surgical_history = async function(text) {
-        await this.setState({surgical_history: text})
+        let new_profile = this.state.profile
+    new_profile.surgical_history = text
+    await this.setState({profile: new_profile});
     }
     change_other_details = async function(text) {
-        await this.setState({other_details: text})
+        let new_profile = this.state.profile
+    new_profile.other_details = text
+    await this.setState({profile: new_profile});
     }
 
 
     next_press() {
-        step3_pass = {}
-        Object.assign(step3_pass, this.props.route.params)
-        Object.assign(step3_pass ,this.state)
-        Alert.alert(JSON.stringify(step3_pass))
-        this.props.navigation.navigate('Emergency Contact',step3_pass);
+        this.context.setProfile(this.state.profile);
+        this.props.navigation.navigate('Emergency Contact');
     }
 
     prev_press(){
+        this.context.setProfile(this.state.profile);
         this.props.navigation.navigate('General Info');
     }
     
@@ -91,7 +110,7 @@ render()
             justifyContent: 'center',
         }}>
             <Text style = {styles.SignUpFormText}>Height</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Height' value = {this.state.height} onChangeText = {this.change_height} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Height' value = {this.state.profile.height} onChangeText = {this.change_height} />
             </View>
             <View style = {{
             width: '45%',
@@ -99,7 +118,7 @@ render()
             justifyContent: 'center',
         }}>
             <Text style = {styles.SignUpFormText}>Weight</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Weight' value = {this.state.weight} onChangeText = {this.change_weight} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Weight' value = {this.state.profile.weight} onChangeText = {this.change_weight} />
 
             </View>
         </View>
@@ -114,7 +133,7 @@ render()
             justifyContent: 'center',
         }}>
             <Text style = {styles.SignUpFormText}>Blood Group</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Blood Group' value = {this.state.blood_group} onChangeText = {this.change_blood_group}/>
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Blood Group' value = {this.state.profile.blood_group} onChangeText = {this.change_blood_group}/>
             </View>
             <View style = {{
             width: '45%',
@@ -122,7 +141,7 @@ render()
             justifyContent: 'center',
         }}>
             <Text style = {styles.SignUpFormText}>Blood Pressure</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Blood Pressure' value = {this.state.blood_pressure} onChangeText = {this.change_blood_pressure} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Blood Pressure' value = {this.state.profile.blood_pressure} onChangeText = {this.change_blood_pressure} />
 
             </View>
         </View>
@@ -130,15 +149,15 @@ render()
         
         
         <Text style = {styles.SignUpFormText}>Allergies</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Please mention Allergies' value = {this.state.allergies} onChangeText = {this.change_allergies}/>
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Please mention Allergies' value = {this.state.profile.allergies} onChangeText = {this.change_allergies}/>
         <Text style = {styles.SignUpFormText}>Sugar Level</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter your sugar level' value = {this.state.sugar_level} onChangeText = {this.change_sugar_level} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter your sugar level' value = {this.state.profile.sugar_level} onChangeText = {this.change_sugar_level} />
         <Text style = {styles.SignUpFormText}>Routine Medications</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Routine Medications' value = {this.state.routine_medications} onChangeText = {this.change_routine_medications} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Routine Medications' value = {this.state.profile.routine_medications} onChangeText = {this.change_routine_medications} />
         <Text style = {styles.SignUpFormText}>Surgical History</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter your Surgical History' value = {this.state.surgical_history} onChangeText = {this.change_surgical_history}/>
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter your Surgical History' value = {this.state.profile.surgical_history} onChangeText = {this.change_surgical_history}/>
         <Text style = {styles.SignUpFormText}>Other Details</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Please mention anything not covered in previous headings' value = {this.state.other_details} onChangeText = {this.change_other_details} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Please mention anything not covered in previous headings' value = {this.state.profile.other_details} onChangeText = {this.change_other_details} />
         </ View>
 
         <View style = {styles.SignUpNavigationContainer}>
