@@ -18,3 +18,17 @@ export const signIn = async (data,CB)=>{
     })
 
 }
+
+export const signUp = async (data,CB)=>{
+  const url = "/patient/sign_up";
+  await fetch(host + url,{body: JSON.stringify(data), method : "POST", headers: headers})
+  .then((data)=>data.json())
+  .then((data)=>{
+   CB(true, data)
+  })
+  .catch(err=>{
+    console.log(err)
+    CB(false,err)
+  })
+
+}

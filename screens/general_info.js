@@ -8,8 +8,8 @@ class GeneralInfoView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: '',
-      lastname: '',
+      first_name: '',
+      last_name: '',
       dob: new Date(),
       gender: 'male',
       relationship_status: '',
@@ -32,11 +32,11 @@ class GeneralInfoView extends React.Component {
   }
 
   changeFirstName = async function (text) {
-    await this.setState({firstname: text});
+    await this.setState({first_name: text});
   };
 
   changeLastName = async function (text) {
-    await this.setState({lastname: text});
+    await this.setState({last_name: text});
   };
   changeDob = async function (text) {
     await this.setState({dob: text});
@@ -108,7 +108,7 @@ class GeneralInfoView extends React.Component {
               <TextInput
                 style={styles.SignUpFormTextInput}
                 placeholder="Enter First Name"
-                value={this.state.firstname}
+                value={this.state.first_name}
                 onChangeText={this.changeFirstName}
               />
             </View>
@@ -122,7 +122,7 @@ class GeneralInfoView extends React.Component {
               <TextInput
                 style={styles.SignUpFormTextInput}
                 placeholder="Enter Last Name"
-                value={this.state.lastname}
+                value={this.state.last_name}
                 onChangeText={this.changeLastName}
               />
             </View>

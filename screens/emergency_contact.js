@@ -9,23 +9,23 @@ class EmergencyContactView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            em_person_name : '',
-            em_person_contact : '',
+            em_contact_name : '',
+            em_phone : '',
             
         }
         this.next_press = this.next_press.bind(this);
         this.prev_press = this.prev_press.bind(this);
-        this.change_em_person_name = this.change_em_person_name.bind(this);
-        this.change_em_person_contact = this.change_em_person_contact.bind(this);
+        this.change_em_contact_name = this.change_em_contact_name.bind(this);
+        this.change_em_phone = this.change_em_phone.bind(this);
 
     }
     
-    change_em_person_name = async function(text) {
-        await this.setState({em_person_name: text})
+    change_em_contact_name = async function(text) {
+        await this.setState({em_contact_name: text})
     }
 
-    change_em_person_contact = async function(text) {
-        await this.setState({em_person_contact: text})
+    change_em_phone = async function(text) {
+        await this.setState({em_phone: text})
     }
 
     prev_press() {
@@ -45,9 +45,9 @@ render()
     return <View>
     <View style = {styles.SignUpFormContainer}>
         <Text style = {styles.SignUpFormText}>Emergency Contact Person's Name</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Emergency Contact Name' value = {this.state.em_person_name} onChangeText = {this.change_em_person_name} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Emergency Contact Name' value = {this.state.em_contact_name} onChangeText = {this.change_em_contact_name} />
         <Text style = {styles.SignUpFormText}>Emergency Contact Person's Phone Number</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Phone Number' value = {this.state.em_person_contact} onChangeText = {this.change_em_person_contact} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter Phone Number' value = {this.state.em_phone} onChangeText = {this.change_em_phone} />
         </View>
         <View style = {styles.SignUpNavigationContainer}>
             <View style = {{

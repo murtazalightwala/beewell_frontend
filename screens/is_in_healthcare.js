@@ -9,16 +9,30 @@ class IsinHealthCareView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            is_in_healthcare : null,
-            healthcare_catagory : null,
+            is_in_healthcare : "",
+            healthcare_catagory : "",
             
 
         }
+        this.changeIsInHealthCare = this.changeIsInHealthCare.bind(this)
+        this.changeHealthCareCatagory = this.changeHealthCareCatagory.bind(this)
         this.next_press = this.next_press.bind(this);
         this.prev_press = this.prev_press.bind(this);
 
     }
-
+    changeIsInHealthCare = async function (text) {
+        if (text.toLowerCase() === "yes"){
+            let bool = true;
+        }
+        else{
+            bool = false;
+        }
+        await this.setState({is_in_healthcare: bool});
+      };
+      changeHealthCareCatagory = async function (text) {
+        await this.setState({healthcare_catagory: text});
+      };
+    
       next_press() {
           form_data = {}
           Object.assign(form_data, this.props.route.params)
@@ -36,9 +50,9 @@ render()
     return <View>
     <View style = {styles.SignUpFormContainer}>
         <Text style = {styles.SignUpFormText}>Are You A Healthcare Worker?</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Please Enter Yes or No' value = {this.state.is_in_healthcare} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Please Enter Yes or No' value = {this.state.is_in_healthcare} onChangeText = {this.changeIsInHealthCare} />
         <Text style = {styles.SignUpFormText}>Please Enter Catagory</Text>
-        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter catagory' value = {this.state.healthcare_catagory} />
+        <TextInput style = {styles.SignUpFormTextInput} placeholder = 'Enter catagory' value = {this.state.healthcare_catagory} onChangeText = {this.changeHealthCareCatagory} />
         </View>
         <View style = {styles.SignUpNavigationContainer}>
             <View style = {{

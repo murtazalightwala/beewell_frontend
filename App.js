@@ -16,7 +16,6 @@ import {AsyncStorage} from 'react-native';
 async function _getUserItems() {
   let user = await AsyncStorage.getItem("user")
   let token = await AsyncStorage.getItem("token")
-  console.log({user, token})
   return {user, token};
 }
 
